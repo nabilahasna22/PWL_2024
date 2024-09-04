@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,10 +39,14 @@ use Illuminate\Support\Facades\Route;
     return 'Selamat Datang';
 });*/
 
+Route::get('/', [HomeController::class,'index']);
+
 //Membuat route ‘/about’ untuk menampilkan NIM dan Nama.
 /*Route::get('/about', function () {
     return 'NIM: 2241760077 Nama: Nabila Hasna Rafifah Hardani';
 });*/
+
+Route::get('/about', [AboutController::class,'about']);
 
 //Memanggil route /user/{name} sekaligus mengirimkan parameter berupa nama user $name
 /*Route::get('/user/{name}', function ($name) {
@@ -53,16 +63,40 @@ use Illuminate\Support\Facades\Route;
     return 'Halaman Artikel dengan ID '.$id;
 });*/
 
+Route::get('/articles/{id}', [ArticlesController::class,'articles']);
+
 //Memanggil route /user sekaligus mengirimkan parameter berupa nama user $name dimana parameternya bersifat opsional.
 /*Route::get('/user/{name?}', function ($name=null) {
     return 'Nama saya '.$name;
 });*/
 
 //Mengubah kode pada route /user. menambahkan value pada parameter $nama
-Route::get('/user/{name?}', function ($name='John') {
+/*Route::get('/user/{name?}', function ($name='John') {
     return 'Nama saya '.$name;
-});
+});*/
+
+//PRAKTIKUM 2
+//Menambahkan controller yang sudah didefinisikan action pada route
+//Route::get('/hello', [WelcomeController::class,'hello']);
+  
+//Mengubah route ‘/’ untuk menjadi controller indeks
+//Route::get('/', [PageController::class,'index']);
+  
+//Mengubah route ‘/about’ untuk menjadi controler about
+//Route::get('/about', [PageController::class,'about']);
+
+//Mengubah route ‘/articles’ untuk menjadi controler articles
+//Route::get('/articles/{id}', [PageController::class,'articles']);
+
+//Membuat route baru agar dapat terhubung dengan frontend
+Route::resource('photos', PhotoController::class);
 
 
-    
+Route::resource('photos', PhotoController::class)->only([
+     'index', 'show'
+]);
+
+Route::resource('photos', PhotoController::class)->except([
+    'create', 'store', 'update', 'destroy'
+]);
 
