@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{{-- view pada resources/view/hello.blade.php--}}
+{{-- view pada rescources/view/hello.blade.php --}}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello, {($name)}</h1>
+    <h1>Hello, {{ $name }}</h1>
+    <h1>You are {{ $occupation }}</h1>
 </body>
 </html>
-
